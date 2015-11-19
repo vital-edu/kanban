@@ -1,16 +1,34 @@
 <header>
-  <div class="navbar">
-    <ul>
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
-      <li><%= link_to 'Início', root_path, id: 'logo' %></li>
-      <li><%= link_to 'Projetos', projects_path %></li>
-    </ul>
-  </div>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <nav>
+    <div class="nav-wrapper">
+      <%= link_to 'Início', root_path, class: 'brand-logo' %>
+      <a href="#" data-activates="mobile-demo" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><%= link_to 'Projetos', projects_path %></li>
+        <% if user_signed_in? %>
+          <li> Bem vindo, <strong><%= current_user.email %></strong>. </li>
+          <li> <%= link_to 'Editar perfil', edit_user_registration_path%> </li>
+          <li> <%= link_to "Sair", destroy_user_session_path, method: :delete %> </li>
+        <% else %>
+          <li> <%= link_to "Registrar-se", new_user_registration_path %> </li>
+          <li> <%= link_to "Entrar", new_user_session_path %> </li>
+        <% end %>
+      </ul>
+
+      <ul class="side-nav" id="mobile-demo">
+        <li><%= link_to 'Projetos', projects_path %></li>
+        <% if user_signed_in? %>
+          <li> Bem vindo, <strong><%= current_user.email %></strong>. </li>
+          <li> <%= link_to 'Editar perfil', edit_user_registration_path%> </li>
+          <li> <%= link_to "Sair", destroy_user_session_path, method: :delete %> </li>
+        <% else %>
+          <li> <%= link_to "Registrar-se", new_user_registration_path %> </li>
+          <li> <%= link_to "Entrar", new_user_session_path %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 </header>
