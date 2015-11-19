@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  description: 
+  start_date: 
+  end_date: 
+  progress: 1
+
+two:
+  name: 
+  description: 
+  start_date: 
+  end_date: 
+  progress: 1

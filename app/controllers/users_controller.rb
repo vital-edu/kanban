@@ -1,64 +1,105 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_filter :get_user, :only => [:index,:new,:edit]
+  # before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
+  # load_and_authorize_resource :only => [:show,:new,:destroy,:edit,:update]
 
-  # GET /users
-  # GET /users.json
   def index
-    @users = User.all
+    @users = User.accessible_by(current_ability, :index).limit(20)
+    respond_to do |format|
+      format.json { render :json => @users }
+      format.xml  { render :xml => @users }
+      format.html
+    end
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
+    @user = User.all
   end
 
-  # GET /users/new
   def new
-    @user = User.new
+    respond_to do |format|
+      format.json { render :json => @user }
+      format.xml  { render :xml => @user }
+      format.html
+    end
   end
 
-  # GET /users/1/edit
   def edit
+    respond_to do |format|
+      format.json { render :json => @user }
+      format.xml  { render :xml => @user }
+      format.html
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:json, :xml, :html)
   end
 
-  # POST /users
-  # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(params[:user])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if @user.save
+      respond_to do |format|
+        format.json { render :json => @user.to_json, :status => 200 }
+        format.xml  { head :ok }
+        format.html { redirect_to :action => :index }
+      end
+    else
+      respond_to do |format|
+        format.json { render :text => "Could not create user", :status => :unprocessable_entity } # placeholder
+        format.xml  { head :ok }
+        format.html { render :action => :new, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
+    if params[:user][:password].blank?
+      [:password,:password_confirmation,:current_password].collect{|p| params[:user].delete(p) }
+    else
+      @user.errors[:base] << "The password you entered is incorrect" unless @user.valid_password?(params[:user][:current_password])
+    end
+
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+      if @user.errors[:base].empty? and @user.update_attributes(params[:user])
+        flash[:notice] = "Your account has been updated"
+        format.json { render :json => @user.to_json, :status => 200 }
+        format.xml  { head :ok }
+        format.html { render :action => :edit }
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render :text => "Could not update user", :status => :unprocessable_entity } #placeholder
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.html { render :action => :edit, :status => :unprocessable_entity }
       end
     end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:js, :xml, :html)
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
-    @user.destroy
+    @user.destroy!
+
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { respond_to_destroy(:ajax) }
+      format.xml  { head :ok }
+      format.html { respond_to_destroy(:html) }
     end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:json, :xml, :html)
+  end
+
+  # Get roles accessible by the current user
+  #----------------------------------------------------
+  def accessible_roles
+    @accessible_roles = Role.all
+  end
+
+  # Make the current user object available to views
+  #----------------------------------------
+  def get_user
+    @current_user = current_user
   end
 
   private
