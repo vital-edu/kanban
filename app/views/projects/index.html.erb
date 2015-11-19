@@ -22,9 +22,9 @@
         <td><%= project.start_date %></td>
         <td><%= project.end_date %></td>
         <td><%= project.progress %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Exibir', project %></td>
+        <td><%= link_to 'Editar', edit_project_path(project) %></td>
+        <td><%= link_to 'Excluir', project, method: :delete, data: { confirm: 'Tem certeza que deseja efetuar essa operação?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'Novo Projeto', new_project_path %>
