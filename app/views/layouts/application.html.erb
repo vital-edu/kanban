@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>InSoft</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+</head>
+
+<%= render '/layouts/header' %>
+<div class="main-content">
+<%= yield %>
+</div>
+<%= render '/layouts/footer' %>
+
+<body>
+
+<%= yield %>
+
+</body>
+</html>
