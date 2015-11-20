@@ -14,15 +14,25 @@
                       <%= t.description %>
                     </p>
                     <p>
-                    <strong>Prioridade: </strong>
-                    <%= t.priority %>
-                    <br>
-                    <strong>Status: </strong>
-                    <%= t.status %>
-                      <%= link_to edit_task_path(t), class: 'btn-floating waves-effect waves-light blue right' do %>
-                        <i class="tiny material-icons">description</i>
-                      <% end %>
+                      <strong>Prioridade: </strong>
+                      <%= t.priority %>
+                      <br>
+                      <strong>Status: </strong>
+                      <%= t.status %>
+                      <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light btn-floating modal-trigger blue right" href="#modal-task-<%=t.id%>">
+                          <i class="tiny material-icons">description</i>
+                        </a>
                     </p>
+                    <!-- Modal Structure -->
+                    <% @task = t %>
+                    <div id="modal-task-<%=t.id%>" class="modal black-text">
+                      <div class="modal-content">
+                        <h4>Editar tarefa: <%= t.name %> </h4>
+                        <%= render 'tasks/form' %>
+                      </div>
+                    </div>
+                    <!-- End Modal -->
                     <br>
                   </div>
                 </li>
@@ -30,9 +40,22 @@
           </ul>
         <div class="card-action">
           <center>
-            <%= link_to new_task_path(project_id: @project.id, stage_id: s), class: 'btn-floating waves-effect waves-light red' do %>
-              <i class="material-icons">add</i>
-            <% end %>
+            <!-- Modal Trigger -->
+              <a class="waves-effect waves-light btn-floating modal-trigger green" href="#modal-task-new-<%= s.id %>">
+                <i class="tiny material-icons">add</i>
+              </a>
+            </p>
+            <!-- Modal Structure -->
+            <% @task = Task.new %>
+            <% @task.stage_id = s.id %>
+            <% @task.project_id = @project.id %>
+            <div id="modal-task-new-<%= s.id %>" class="modal black-text">
+              <div class="modal-content">
+                <h4>Criar tarefa</h4>
+                <%= render 'tasks/form' %>
+              </div>
+            </div>
+            <!-- End Modal -->
           </center>
         </div>
       </div>
@@ -40,5 +63,11 @@
   <% end %>
 </div>
 
-<%= link_to 'Editar projeto', edit_project_path(@project) %> |
-<%= link_to 'Voltar', projects_path %>
+<div class="row">
+  <div class="col">
+    <%= link_to 'Editar projeto', edit_project_path(@project), class: 'waves-effect waves-light btn'%>
+  </div>
+  <div class="col">
+    <%= link_to 'Voltar', projects_path, class: 'waves-effect waves-light btn' %>
+  </div>
+</div>

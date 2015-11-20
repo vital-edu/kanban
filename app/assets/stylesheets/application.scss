@@ -4,8 +4,13 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-nav .nav-wrapper i {
+.nav .nav-wrapper i {
   font-size: 4rem;
+}
+
+.modal {
+  width: 90%;
+  max-height: 85%;
 }
 
 /*

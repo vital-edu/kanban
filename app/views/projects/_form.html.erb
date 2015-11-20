@@ -40,10 +40,15 @@
     <%= f.label :progress %><br>
     <%= f.number_field :progress %>
   </div>
-  <div class="actions">
-    <%= f.button :button, class: 'btn waves-effect waves-light' do %>
-      <i class="material-icons right">send</i>
-      Criar projeto
-    <% end %>
+  <div class="modal-footer row">
+    <div class="col right">
+      <%= f.button :button, class: 'btn waves-effect waves-light' do %>
+        <i class="material-icons right">send</i>
+        Salvar projeto
+      <% end %>
+    </div>
+    <div class="col right">
+      <a href="#!" class="modal-action modal-close waves-effect waves-light btn red accent-2"> Cancelar </a>
+    </div>
   </div>
 <% end %>
