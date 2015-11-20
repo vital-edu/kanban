@@ -1,11 +1,6 @@
 module ProjectsHelper
   def stages project
-    tasks = project.tasks.select(:stage_id).uniq
-    stages = Array.new
-    tasks.each do |t|
-      stages.push(t[:stage_id])
-    end
-    stages
+    tasks = project.stages
   end
 
   def stage_name stage

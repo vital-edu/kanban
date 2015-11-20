@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to Project.find(@task.project_id), notice: 'Tarefa criada com sucesso.' }
+        format.html { redirect_to @task.project, notice: 'Tarefa criada com sucesso.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to Project.find(@task.project_id), notice: 'Tarefa atualizada com sucesso.' }
+        format.html { redirect_to @task.project, notice: 'Tarefa atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    back = Project.find(@task.project_id)
+    back = @task.project
     @task.destroy
     respond_to do |format|
       format.html { redirect_to back, notice: 'Task was successfully destroyed.' }

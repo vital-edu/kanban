@@ -2,7 +2,7 @@
   <% stages(@project).each do |s| %>
     <div class="col s12 m3">
       <div class="card-panel teal">
-        <span class="card-title"><%= stage_name(s) %></span>
+        <span class="card-title white-text"><%= s.name %></span>
         <% stage_tasks(@project, s).each do |t| %>
           <div class="row">
             <div class="card blue-grey darken-1">
@@ -28,8 +28,12 @@
       </div>
     </div>
   <% end %>
+  <div class="col s12 m3">
+    <div class="card-panel teal">
+      <%= link_to 'Nova lista', new_stage_path(project_id: @project.id) %>
+    </div>
+  </div>
 </div>
 
-<%= link_to 'Nova tarefa', new_task_path(project_id: @project.id) %> |
 <%= link_to 'Editar projeto', edit_project_path(@project) %> |
 <%= link_to 'Voltar', projects_path %>

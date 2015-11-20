@@ -15,6 +15,7 @@ class StagesController < ApplicationController
   # GET /stages/new
   def new
     @stage = Stage.new
+    @stage.project_id = params[:project_id]
   end
 
   # GET /stages/1/edit
@@ -28,7 +29,7 @@ class StagesController < ApplicationController
 
     respond_to do |format|
       if @stage.save
-        format.html { redirect_to @stage, notice: 'Stage was successfully created.' }
+        format.html { redirect_to @stage.project, notice: 'Stage was successfully created.' }
         format.json { render :show, status: :created, location: @stage }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class StagesController < ApplicationController
   def update
     respond_to do |format|
       if @stage.update(stage_params)
-        format.html { redirect_to @stage, notice: 'Stage was successfully updated.' }
+        format.html { redirect_to @stage.project, notice: 'Stage was successfully updated.' }
         format.json { render :show, status: :ok, location: @stage }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class StagesController < ApplicationController
   # DELETE /stages/1
   # DELETE /stages/1.json
   def destroy
+    back = @stage.project
     @stage.destroy
     respond_to do |format|
-      format.html { redirect_to stages_url, notice: 'Stage was successfully destroyed.' }
+      format.html { redirect_to back, notice: 'Stage was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class StagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stage_params
-      params.require(:stage).permit(:name)
+      params.require(:stage).permit(:name, :project_id)
     end
 end
