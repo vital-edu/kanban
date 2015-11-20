@@ -5,15 +5,8 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
-  <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
-  <% end %>
-  <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
-  <% end %>
 </head>
-<body>
+<body onload="Materialize.toast('<%= alert ? alert : notice %>', 5000, 'rounded')">
 
 <%= render '/layouts/header' %>
 <div class="main-content">
