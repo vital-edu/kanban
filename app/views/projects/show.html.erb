@@ -1,29 +1,23 @@
-<p id="notice"><%= notice %></p>
+    <div class="row">
+      <% @project.tasks.each do |t| %>
+          <div class="col s12 m2">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title"><%= t.name %></span>
+                <p><%= t.description %></p>
+              </div>
+              <div class="card-action">
+                <center>
+                  <%= link_to t, class: 'btn waves-effect waves-light' do %>
+                    <i class="material-icons">info_outline</i>
+                  <% end %>
+                </center>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @project.end_date %>
-</p>
-
-<p>
-  <strong>Progress:</strong>
-  <%= @project.progress %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Nova tarefa', new_task_path(project_id: @project.id) %> |
+<%= link_to 'Editar projeto', edit_project_path(@project) %> |
 <%= link_to 'Voltar', projects_path %>
