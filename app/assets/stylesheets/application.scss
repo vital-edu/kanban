@@ -1,7 +1,12 @@
 @import "materialize/components/color";
 @import 'materialize';
 @import "materialize/extras/nouislider";
-// $primary-color: color("blue", "lighten-2") !default;
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+nav .nav-wrapper i {
+  font-size: 4rem;
+}
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
