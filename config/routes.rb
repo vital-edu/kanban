@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stages
   resources :tasks
   resources :projects
   resources :roles

@@ -1,22 +1,34 @@
-    <div class="row">
-      <% @project.tasks.each do |t| %>
-          <div class="col s12 m2">
+<div class="row">
+  <% stages(@project).each do |s| %>
+    <div class="col s12 m3">
+      <div class="card-panel teal">
+        <span class="card-title"><%= stage_name(s) %></span>
+        <% stage_tasks(@project, s).each do |t| %>
+          <div class="row">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title"><%= t.name %></span>
                 <p><%= t.description %></p>
               </div>
               <div class="card-action">
-                <center>
                   <%= link_to t, class: 'btn waves-effect waves-light' do %>
                     <i class="material-icons">info_outline</i>
                   <% end %>
-                </center>
               </div>
             </div>
           </div>
-      <% end %>
+        <% end %>
+        <div class="card-action">
+          <center>
+            <%= link_to new_task_path(project_id: @project.id, stage_id: s), class: 'btn-floating btn-large waves-effect waves-light red' do %>
+              <i class="material-icons">add</i>
+            <% end %>
+          </center>
+        </div>
+      </div>
     </div>
+  <% end %>
+</div>
 
 <%= link_to 'Nova tarefa', new_task_path(project_id: @project.id) %> |
 <%= link_to 'Editar projeto', edit_project_path(@project) %> |
