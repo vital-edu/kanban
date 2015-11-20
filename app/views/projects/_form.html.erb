@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <div class="file-field input-field">
+    <div class="btn">
+      <span>File</span>
+      <%= f.file_field :image %>
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text" placeholder="Upload one file">
+    </div>
+  </div>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>

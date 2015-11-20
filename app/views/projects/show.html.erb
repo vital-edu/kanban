@@ -1,6 +1,6 @@
 <div class="row">
   <% stages(@project).each do |s| %>
-    <div class="col s12 m3">
+    <div class="col s12 m4">
       <div class="card-panel teal">
         <span class="card-title white-text"><%= s.name %></span>
         <% stage_tasks(@project, s).each do |t| %>
@@ -28,11 +28,6 @@
       </div>
     </div>
   <% end %>
-  <div class="col s12 m3">
-    <div class="card-panel teal">
-      <%= link_to 'Nova lista', new_stage_path(project_id: @project.id) %>
-    </div>
-  </div>
 </div>
 
 <%= link_to 'Editar projeto', edit_project_path(@project) %> |
