@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :role
   has_and_belongs_to_many :roles
+  has_and_belongs_to_many :projects
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
