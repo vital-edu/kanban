@@ -4,4 +4,6 @@ class Project < ActiveRecord::Base
   has_many :stages, dependent: :destroy
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates :name, :description, :start_date, :end_date, :progress, presence: true
+  validates :progress, numericality: true
 end
