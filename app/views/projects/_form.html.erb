@@ -1,5 +1,5 @@
-<div class="container">
-  <%= form_for(@project) do |f| %>
+<div id="project-edit">
+  <%= form_for(@project, remote: true) do |f| %>
     <% if @project.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -13,19 +13,19 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :name %><br>
+      <%= f.label :name %>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label :description %><br>
+      <%= f.label :description %>
       <%= f.text_field :description %>
     </div>
     <div class="field">
-      <%= f.label :start_date %><br>
+      <%= f.label :start_date %>
       <%= f.text_field :start_date, class: 'datepicker' %>
     </div>
     <div class="field">
-      <%= f.label :end_date %><br>
+      <%= f.label :end_date %>
       <%= f.text_field :end_date, class: 'datepicker' %>
     </div>
     <div class="file-field input-field">
@@ -38,16 +38,24 @@
       </div>
     </div>
     <div class="field">
-      <%= f.label :progress %><br>
+      <%= f.label :progress %>
       <%= f.number_field :progress %>
     </div>
-    <div class="field">
-      <%= f.label "Desenvolvedores integrantes do projeto" %><br>
-      <%= f.collection_check_boxes( :developers, User.all, :id, :email, :checked => @project.try(:developers_list)) do |b| %>
-        <br>
-        <%= b.label { b.check_box + b.label } %>
+
+    <div class="field" id="select-developers">
+      <%= f.label "Desenvolvedores" %>
+      <%= collection_check_boxes( 'project', :developers, User.all, :id, :email, checked: @project.developers_list) do |b| %>
+      <br>
+        <%= b.label(class: 'check_box-dev') { b.check_box + b.label } %>
       <% end %>
     </div>
+
+    <br>
+    <%= f.label "Scrum Master" %>
+    <div class="col", id="load-scrum-chooser">
+      <%= render 'choose_scrum' %>
+    </div>
+
     <div class="modal-footer row">
       <div class="col right">
         <%= f.button :button, class: 'btn waves-effect waves-light' do %>
@@ -61,3 +69,26 @@
     </div>
   <% end %>
 </div>
+
+<script>
+var boxes, developers_list, i, len;
+
+developers_list = document.getElementById('select-developers');
+
+boxes = developers_list.getElementsByTagName('input');
+
+i = 0;
+
+len = boxes.length;
+
+while (i < len) {
+  if (boxes[i].type === 'checkbox') {
+    boxes[i].onclick = function() {
+      $('#load-scrum-chooser').html("<%= j (render 'choose_scrum') %>");
+      // $('#load-scrum-chooser').slideDown(350);
+      // alert(this.value);
+    };
+  }
+  i++;
+}
+</script>

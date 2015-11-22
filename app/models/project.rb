@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   attr_accessor :developers
+  attr_accessor :scrum_master
 
   after_create :create_default_stages
   before_save :update_developers
@@ -16,6 +17,24 @@ class Project < ActiveRecord::Base
     Role.find_by(name: "Developer").users.each do |d|
       if self.users.find_by_id(d.id).present?
         developers.push(d.id)
+      end
+    end
+    developers
+  end
+
+  def scrum_master
+    self.users.each do |u|
+      if u.roles.find_by(name: "Scrum Master").present?
+        return u.id
+      end
+    end
+  end
+
+  def developers_list_object
+    developers = Array.new
+    Role.find_by(name: "Developer").users.each do |d|
+      if self.users.find_by_id(d.id).present?
+        developers.push(d)
       end
     end
     developers
