@@ -5,6 +5,17 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates :name, :description, :start_date, :end_date, :progress, presence: true
+  validates :progress, numericality: true
+  validate :deadline_is_possible?
+
+  def deadline_is_possible?
+      unless start_date.nil? || end_date.nil?
+        if start_date > end_date
+          errors.add(:start_date, 'must be before end_date')
+        end
+      end
+  end
 
   attr_accessor :developers
   attr_accessor :scrum_master

@@ -61,13 +61,11 @@ ActiveRecord::Schema.define(version: 20151120135945) do
     t.datetime "creationDate"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "stages_id"
     t.integer  "stage_id"
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
   add_index "tasks", ["stage_id"], name: "index_tasks_on_stage_id"
-  add_index "tasks", ["stages_id"], name: "index_tasks_on_stages_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
