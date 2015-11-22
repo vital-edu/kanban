@@ -6,4 +6,11 @@ class Project < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   validates :name, :description, :start_date, :end_date, :progress, presence: true
   validates :progress, numericality: true
+  validate :deadline_is_possible?
+
+  def deadline_is_possible?
+    if start_date > end_date
+      errors.add(:start_date, 'must be before end_date')
+    end
+  end
 end
