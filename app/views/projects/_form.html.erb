@@ -1,5 +1,5 @@
 <div id="project-edit">
-  <%= form_for(@project, remote: true) do |f| %>
+  <%= form_for(@project) do |f| %>
     <% if @project.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -51,12 +51,16 @@
     </div>
 
     <br>
-    <%= f.label "Scrum Master" %>
     <div class="col", id="load-scrum-chooser">
-      <%= render 'choose_scrum' %>
+      <% render 'choose_scrum' %>
     </div>
 
-    <div class="modal-footer row">
+    <div class="divider"></div>
+
+    <div class="section row">
+      <div class="col">
+        <%= link_to 'Voltar', :back, class: 'btn waves-effect waves-light' %>
+      </div>
       <div class="col right">
         <%= f.button :button, class: 'btn waves-effect waves-light' do %>
           <i class="material-icons right">send</i>
@@ -84,7 +88,7 @@ len = boxes.length;
 while (i < len) {
   if (boxes[i].type === 'checkbox') {
     boxes[i].onclick = function() {
-      $('#load-scrum-chooser').html("<%= j (render 'choose_scrum') %>");
+      // $('#load-scrum-chooser').html("<%= j (render 'choose_scrum') %>");
       // $('#load-scrum-chooser').slideDown(350);
       // alert(this.value);
     };

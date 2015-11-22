@@ -1,28 +1,10 @@
 <div class="row center-align">
-  <div class="col right">
-    <!-- Modal Trigger -->
-    <a class="waves-effect waves-light btn-floating btn-large modal-trigger green right" href="#modal-project-new">
-      <i class="material-icons">add</i>
-    </a>
-    <!-- -->
-  </div>
   <div class="center-align">
     <h3>Projetos</h3>
   </div>
 </div>
-
-<!-- Modal Structure -->
-<% @project = Project.new %>
-<div id="modal-project-new" class="modal black-text">
-  <div class="modal-content">
-    <h4>Criar projeto</h4>
-    <%= render 'projects/form' %>
-  </div>
-</div>
-<!-- End Modal -->
-
 <div class="row">
-  <% @projects.each do |p| %>
+<% @projects.each do |p| %>
     <div class="col s12 m12 l4">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
@@ -34,23 +16,12 @@
             <%= link_to p, class: 'btn-floating btn-large waves-effect waves-light blue' do %>
               <i class="material-icons">dashboard</i>
             <% end %>
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn-floating btn-large modal-trigger blue" href="#modal-project-edit-<%= p.id %>">
+            <%= link_to edit_project_path(p), class: 'btn-floating btn-large waves-effect waves-light blue' do %>
               <i class="material-icons">description</i>
-            </a>
-            <!--  -->
+            <% end %>
             <%= link_to p, method: :delete, data: { confirm: 'Tem certeza que deseja excluir este projeto?' }, class: 'btn-floating btn-large waves-effect waves-light red right' do %>
               <i class="material-icons">delete</i>
             <% end %>
-            <!-- Modal Structure -->
-            <% @project = p %>
-            <div id="modal-project-edit-<%= p.id %>" class="modal black-text">
-              <div class="modal-content">
-                <h4>Editar projeto: <%= p.name %></h4>
-                <%= render 'projects/form' %>
-              </div>
-            </div>
-            <!-- End Modal -->
           </p>
         </div>
         <div class="card-reveal">
@@ -77,5 +48,10 @@
         </div>
       </div>
     </div>
+<% end %>
+<div class="col right">
+  <%= link_to new_project_path, class: 'btn-floating btn-large waves-effect waves-light green right' do %>
+    <i class="material-icons">add</i>
   <% end %>
 </div>
+  </div>

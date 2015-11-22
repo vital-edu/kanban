@@ -1,3 +1,4 @@
+<%= label_tag :project, "Scrum Master", class: 'row' %>
 <%= collection_radio_buttons( 'project', :scrum_master, @project.try(:developers_list_object), :id, :email, checked: @project.try(:scrum_master)) do |b| %>
   <% b.label(class: 'row choose-scrum') { b.radio_button + b.label + puts} %>
 <% end %>
