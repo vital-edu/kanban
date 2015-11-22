@@ -13,33 +13,29 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :name %>
+      <%= f.label :name, 'Nome' %>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label :description %>
+      <%= f.label :description, 'Descrição' %>
       <%= f.text_field :description %>
     </div>
     <div class="field">
-      <%= f.label :start_date %>
-      <%= f.text_field :start_date, class: 'datepicker' %>
+      <%= f.label :start_date, 'Data inicial' %>
+      <%= f.date_field :start_date, value:  @project.start_date.strftime("%d %B, %Y"), class: 'datepicker' %>
     </div>
     <div class="field">
-      <%= f.label :end_date %>
-      <%= f.text_field :end_date, class: 'datepicker' %>
+      <%= f.label :end_date, 'Data final' %>
+      <%= f.date_field :end_date, value: @project.end_date.strftime("%d %B, %Y"), class: 'datepicker' %>
     </div>
     <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
+        <span>Selecionar imagem</span>
         <%= f.file_field :image %>
       </div>
       <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="Upload one file">
+        <input class="file-path validate" type="text" placeholder="Envie uma imagem descritiva">
       </div>
-    </div>
-    <div class="field">
-      <%= f.label :progress %>
-      <%= f.number_field :progress %>
     </div>
 
     <div class="field" id="select-developers">
