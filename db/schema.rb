@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120135945) do
+ActiveRecord::Schema.define(version: 20151122181535) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "progress"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20151120135945) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "customer"
+  end
+
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -62,6 +68,7 @@ ActiveRecord::Schema.define(version: 20151120135945) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_id"
+    t.integer  "progress"
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"

@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
-  validates :name, :description, :start_date, :end_date, presence: true
+  validates :name, :description, :start_date, :end_date, :customer, presence: true
   validate :deadline_is_possible?
 
   def deadline_is_possible?

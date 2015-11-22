@@ -18,7 +18,11 @@
     </div>
     <div class="field">
       <%= f.label :description, 'Descrição' %>
-      <%= f.text_field :description %>
+      <%= f.text_area :description, class: 'materialize-textarea' %>
+    </div>
+    <div class="field">
+      <%= f.label :customer, 'Cliente' %>
+      <%= f.text_field :customer %>
     </div>
     <div class="field">
       <%= f.label :start_date, 'Data inicial' %>

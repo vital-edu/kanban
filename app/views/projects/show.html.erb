@@ -10,7 +10,7 @@
           <ul class="collapsible popout" data-collapsible="expandable">
             <% stage_tasks(@project, s).each do |t| %>
                 <li>
-                  <div class="collapsible-header"><i class="material-icons">info_outline</i>
+                  <div class="collapsible-header"><i class="material-icons">pageview</i>
                     <%= t.name %>
                   </div>
                   <div class="collapsible-body red lighten-2 white-text text-darken-2">
@@ -25,7 +25,7 @@
                       <%= t.status %>
                       <!-- Modal Trigger -->
                         <a class="waves-effect waves-light btn-floating modal-trigger blue right" href="#modal-task-<%=t.id%>">
-                          <i class="tiny material-icons">description</i>
+                          <i class="tiny material-icons">mode_edit</i>
                         </a>
                     </p>
                     <!-- Modal Structure -->
@@ -45,7 +45,7 @@
         <div class="card-action center">
             <!-- Modal Trigger -->
               <a class="waves-effect waves-light btn-floating modal-trigger green" href="#modal-task-new-<%= s.id %>">
-                <i class="tiny material-icons">add</i>
+                <i class="tiny material-icons">playlist_add</i>
               </a>
             </p>
             <!-- Modal Structure -->
