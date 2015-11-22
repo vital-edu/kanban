@@ -9,7 +9,6 @@
         <i class="material-icons">menu</i>
       </a>
       <ul class="right hide-on-med-and-down">
-        <li><%= link_to 'Projetos', projects_path %></li>
         <% if user_signed_in? %>
           <li> Bem vindo, <strong><%= current_user.email %></strong>. </li>
           <li> <%= link_to 'Editar perfil', edit_user_registration_path%> </li>
@@ -21,9 +20,7 @@
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
-        <li><%= link_to 'Projetos', projects_path %></li>
         <% if user_signed_in? %>
-          <li> Bem vindo, <strong><%= current_user.email %></strong>. </li>
           <li> <%= link_to 'Editar perfil', edit_user_registration_path%> </li>
           <li> <%= link_to "Sair", destroy_user_session_path, method: :delete %> </li>
         <% else %>
