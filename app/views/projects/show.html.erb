@@ -4,7 +4,9 @@
   <% stages(@project).each do |s| %>
     <div class="col s12 m4">
       <div class="card-panel teal">
-        <span class="card-title white-text"><h5><%= s.name %></h5></span>
+        <span class="card-title white-text center-align">
+            <h5 class="row"><%= s.name %></h5>
+        </span>
           <ul class="collapsible popout" data-collapsible="expandable">
             <% stage_tasks(@project, s).each do |t| %>
                 <li>
@@ -40,8 +42,7 @@
                 </li>
             <% end %>
           </ul>
-        <div class="card-action">
-          <center>
+        <div class="card-action center">
             <!-- Modal Trigger -->
               <a class="waves-effect waves-light btn-floating modal-trigger green" href="#modal-task-new-<%= s.id %>">
                 <i class="tiny material-icons">add</i>
@@ -58,7 +59,6 @@
               </div>
             </div>
             <!-- End Modal -->
-          </center>
         </div>
       </div>
     </div>

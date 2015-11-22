@@ -9,8 +9,13 @@ nav .nav-wrapper i {
 }
 
 .modal {
-  width: 90%;
+  max-width: 30rem;
   max-height: 85%;
+}
+
+.collapsible-body p.range-field {
+  margin: 0;
+  padding: 0rem;
 }
 
 .container .row {
