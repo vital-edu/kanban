@@ -59,7 +59,7 @@
 
     <div class="section row">
       <div class="col">
-        <%= link_to 'Cancelar', :back, class: 'btn red accent-2 waves-effect waves-light' %>
+        <%= link_to 'Cancelar', :back, data: { confirm: 'Tem certeza que deseja cancelar?' },class: 'btn red accent-2 waves-effect waves-light' %>
       </div>
       <div class="col right">
         <%= f.button :button, class: 'btn waves-effect waves-light' do %>
