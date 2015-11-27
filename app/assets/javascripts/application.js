@@ -29,4 +29,6 @@ $( document ).ready(function(){
   $('.modal-trigger').leanModal();
 
   $('ul.tabs').tabs();
+
+  $('select').material_select();
 })

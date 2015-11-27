@@ -19,23 +19,23 @@
     <%= f.label :description, 'Descrição' %>
     <%= f.text_field :description %>
   </div>
+  <%= f.label :status, 'Status' %>
+  <div class="input-field">
+    <%= f.select(:stage_id, select_stage(@task), {}) %>
+  </div>
   <div class="field">
     <%= f.label :priority, 'Prioridade' %>
     <%= f.text_field :priority %>
   </div>
+  <div class="field">
     <%= f.label :progress, 'Progresso' %>
     <p class="range-field">
-    <%= f.range_field :progress %>
+      <%= f.range_field :progress %>
     </p>
-  <div class="field">
-    <%= f.label :status, 'Status' %>
-    <%= f.text_field :status %>
   </div>
   <div class="field">
     <%= f.hidden_field :project_id %>
-    <%= f.hidden_field :stage_id %>
   </div>
-
   <div class="row">
     <div class="col right">
       <%= f.button :button, class: 'btn waves-effect waves-light' do %>
