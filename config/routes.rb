@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   resources :stages
   resources :tasks
-  resources :projects
   resources :roles
   resources :systems
   devise_for :users
+  get 'projects/tasks_archive' => 'projects#tasks_archive'
+  get 'projects/archive' => 'projects#archive'
+  resources :projects
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

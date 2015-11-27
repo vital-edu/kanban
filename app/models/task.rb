@@ -10,6 +10,16 @@ class Task < ActiveRecord::Base
     ['Baixa', 'Média', 'Alta']
   end
 
+  def deactivate
+    self.is_active = false
+    self.save
+  end
+
+  def activate
+    self.is_active = true
+    self.save
+  end
+
 private
   def validate_priority
     if priority_list.index(self.priority).nil?

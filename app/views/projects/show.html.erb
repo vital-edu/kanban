@@ -27,6 +27,9 @@
                         <a class="waves-effect waves-light btn-floating modal-trigger blue right" href="#modal-task-<%=t.id%>">
                           <i class="tiny material-icons">mode_edit</i>
                         </a>
+                        <%= link_to task_path(id: t.id, command: 'deactivate'), data: { confirm: 'Tem certeza que deseja arquivar esta tarefa?' }, class: 'waves-effect waves-light btn-floating modal-trigger red right' do %>
+                          <i class="material-icons">archive</i>
+                        <% end %>
                     </p>
                     <!-- Modal Structure -->
                     <% @task = t %>
@@ -63,6 +66,13 @@
       </div>
     </div>
   <% end %>
+  <div class="col right">
+    <div class="row">
+      <%= link_to projects_tasks_archive_path(project_id: @project.id), class: 'btn-floating btn-large waves-effect waves-light grey right' do %>
+        <i class="material-icons">list</i>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="row">

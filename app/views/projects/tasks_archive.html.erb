@@ -1,0 +1,19 @@
+<h4 class="center-align">Tarefas arquivadas</h4>
+
+<ul class="collection">
+  <% @tasks.each do |t| %>
+    <li class="collection-item">
+      <%= link_to task_path(id: t.id, command: 'activate'), data: { confirm: 'Tem certeza que deseja desarquivar este projeto?' } do %>
+        <i class="material-icons right">unarchive</i>
+      <% end %>
+      <span class="title"><%= t.name %></span>
+      <p><%= t.description %><br>
+      </p>
+    </li>
+  <% end %>
+</ul>
+<div class="row">
+  <div class="left col">
+    <%= link_to 'Voltar', project_path(@project), class: 'waves-effect waves-light btn' %>
+  </div>
+</div>

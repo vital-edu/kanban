@@ -62,6 +62,16 @@ class Project < ActiveRecord::Base
     self.save
   end
 
+  def deactivate
+    self.is_active = false
+    self.save
+  end
+
+  def activate
+    self.is_active = true
+    self.save
+  end
+
 private
   def create_default_stages
     self.stages << Stage.create(name: "To Do")

@@ -1,11 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :verify_command, only: :show
 
   # GET /tasks/new
   def new
     @task = Task.new
     @task.project_id = params[:project_id]
     @task.stage_id = params[:stage_id]
+  end
+
+  def archive
+    @tasks = Tasks.where(is_active: false)
   end
 
   # GET /tasks/1/edit
@@ -42,18 +47,36 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
-  def destroy
-    back = @task.project
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to back, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
+    # Verify if the user wants to deactivate or activate a task
+    def verify_command
+      if params[:command].present?
+        if params[:command] == 'deactivate'
+          deactivate
+        elsif params[:command] == 'activate'
+          activate
+        end
+      end
+    end
+
+    def activate
+      Task.find(params[:id]).activate
+
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'A tarefa foi desarquivada com sucesso.' }
+        format.json { head :no_content }
+      end
+    end
+
+    def deactivate
+      Task.find(params[:id]).deactivate
+
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'A tarefa foi arquivada com sucesso.' }
+        format.json { head :no_content }
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])

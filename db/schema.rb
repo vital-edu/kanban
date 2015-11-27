@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127122557) do
+ActiveRecord::Schema.define(version: 20151127140832) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151127122557) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "customer"
+    t.boolean  "is_active",          default: true
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 20151127122557) do
     t.datetime "updated_at"
     t.integer  "stage_id"
     t.integer  "progress"
+    t.boolean  "is_active",    default: true
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"

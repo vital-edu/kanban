@@ -8,7 +8,7 @@ module ProjectsHelper
   end
 
   def stage_tasks (project, stage)
-    project.tasks.where(stage_id: stage)
+    project.tasks.where(stage_id: stage, is_active: true)
   end
 
 end

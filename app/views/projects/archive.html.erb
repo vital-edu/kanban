@@ -1,0 +1,22 @@
+<h4 class="center-align">Projetos arquivados</h4>
+
+<ul class="collection">
+  <% @projects.each do |p| %>
+    <li class="collection-item avatar">
+      <img src="<%= p.image.url %>" alt="" class="circle">
+      <span class="title"><%= p.name %></span>
+      <p><%= p.description %><br>
+         <div class="strong">Data inicial: </strong><%= p.start_date.strftime("%d/%m/%Y") %><br>
+         <strong>Data final: </strong><%= p.end_date.strftime("%d/%m/%Y") %>
+      </p>
+      <%= link_to project_path(id: p.id, command: 'activate'), data: { confirm: 'Tem certeza que deseja desarquivar este projeto?' }, class: 'secondary-content' do %>
+        <i class="material-icons">unarchive</i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<div class="row">
+  <div class="left col">
+    <%= link_to 'Voltar', projects_path, class: 'waves-effect waves-light btn' %>
+  </div>
+</div>
