@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
       Project.find(params[:id]).activate
 
       respond_to do |format|
-        format.html { redirect_to :back, notice: 'O projeto foi desarquivado com sucesso.' }
+        format.html { redirect_to projects_path, notice: 'O projeto foi desarquivado com sucesso.' }
         format.json { head :no_content }
       end
     end
