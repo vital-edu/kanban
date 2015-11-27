@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   validates :name, :priority, :description, presence: true
   validates :priority, numericality: { only_integer: true }
 
-  after_commit :update_project_progress
+  after_save :update_project_progress
 
 private
   def update_project_progress
