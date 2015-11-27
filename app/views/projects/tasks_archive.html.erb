@@ -3,7 +3,7 @@
 <ul class="collection">
   <% @tasks.each do |t| %>
     <li class="collection-item">
-      <%= link_to task_path(id: t.id, command: 'activate') do %>
+      <%= link_to task_path(id: t.id, command: 'activate'), data: { confirm: 'Tem certeza que deseja re-ativar esta tarefa?' } do %>
         <i class="material-icons right">unarchive</i>
       <% end %>
       <span class="title"><%= t.name %></span>
