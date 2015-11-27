@@ -21,11 +21,11 @@
   </div>
   <%= f.label :status, 'Status' %>
   <div class="input-field">
-    <%= f.select(:stage_id, select_stage(@task), {}) %>
+    <%= f.select(:stage_id, select_stage(@task)) %>
   </div>
   <div class="field">
     <%= f.label :priority, 'Prioridade' %>
-    <%= f.text_field :priority %>
+    <%= f.select(:priority, @task.priority_list) %>
   </div>
   <div class="field">
     <%= f.label :progress, 'Progresso' %>
