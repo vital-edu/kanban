@@ -42,6 +42,14 @@ gem 'font-awesome-sass', '~> 4.4.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'simplecov', require: false
+  gem 'autotest-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'metric_fu'
+  gem 'jasmine'
 end
 
 group :development do
